@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Buid') {
+            steps {
+                // Your test steps here
+                sh 'echo Running the build'
+            }
+        }
+
+        stage('Tag') {
+            when {
+                // You can set conditions for when to tag
+                expression { currentBuild.result == 'SUCCESS' }
+            }
+            steps {
+                script {
+                    def tagName = "v${env.BUILD_NUMBER}" // or any other naming convention
+                    sh "git tag -a ${tagName} -m 'Release version ${tagName}'"
+                    sh "git push origin ${tagName}"
+                }
+            }
+        }
+    }
+}
