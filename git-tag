@@ -11,13 +11,14 @@ pipeline {
         stage('Buid') {
             steps {
                 // Your test steps here
-                sh 'echo Running the build'
+                sh 'echo "Current build result: ${currentBuild.result}"'       
             }
         }
 
         stage('Tag') {
             when {
                 // You can set conditions for when to tag
+                sh 'echo "Tagging the build with version: ${tagName}"'
                 expression { currentBuild.result == 'SUCCESS' }
             }
             steps {
