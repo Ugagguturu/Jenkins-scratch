@@ -18,7 +18,6 @@ pipeline {
         stage('Tag') {
             when {
                 // You can set conditions for when to tag
-                sh 'echo Tagging the build with version: ${tagName}'
                 expression { currentBuild.result == 'SUCCESS' }
             }
             steps {
@@ -26,6 +25,7 @@ pipeline {
                     def tagName = "v${env.BUILD_NUMBER}" // or any other naming convention
                     sh "git tag -a ${tagName} -m 'Release version ${tagName}'"
                     sh "git push origin ${tagName}"
+                    sh 'echo Tagging the build with version: ${tagName}'
                 }
             }
         }
