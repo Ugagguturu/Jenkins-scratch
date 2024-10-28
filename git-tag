@@ -16,9 +16,7 @@ pipeline {
         }
 
         stage('Tag') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
+          
             steps {
                 script {
                     // Define the tag name
