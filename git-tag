@@ -8,24 +8,29 @@ pipeline {
             }
         }
 
-        stage('Buid') {
+        stage('Build') {
             steps {
-                // Your test steps here
-                sh 'echo Current build result: ${currentBuild.result}'       
+                // Your build steps here
+                sh 'echo Running the build'
             }
         }
 
         stage('Tag') {
             when {
-                // You can set conditions for when to tag
                 expression { currentBuild.result == 'SUCCESS' }
             }
             steps {
                 script {
+                    // Define the tag name
                     def tagName = "v${env.BUILD_NUMBER}" // or any other naming convention
-                    sh "git tag -a ${tagName} -m 'Release version ${tagName}'"
-                    sh "git push origin ${tagName}"
-                    sh 'echo Tagging the build with version: ${tagName}'
+
+                    // Tag the commit
+                    sh """
+                        git config user.email "gagguturuudaykamalbabu@gmail.com"
+                        git config user.name "Ugagguturu"
+                        git tag -a ${tagName} -m "Release version ${tagName}"
+                        git push origin ${tagName}
+                    """
                 }
             }
         }
