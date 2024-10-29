@@ -24,7 +24,7 @@ pipeline {
 
                     // Tag the commit
                     sh """
-                        git config user.email "gagguturuudaykamalbabu@gmail.com"
+                        git config user.email "ugagguturu@softility.com"
                         git config user.name "Ugagguturu"
                         git tag -a ${tagName} -m "Release version ${tagName}"
                         git push origin ${tagName}
