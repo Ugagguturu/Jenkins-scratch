@@ -27,7 +27,8 @@ pipeline {
                             git config user.email "ugagguturu@softility.com"
                             git config user.name "Ugagguturu"
                             git tag -a ${tagName} -m "Release version ${tagName}"
-                            git push https://Ugagguturu:${GITHUB_TOKEN}@github.com/Ugagguturu/Jenkins-scratch.git ${tagName}
+                            git remote set-url origin https://Ugagguturu:${GITHUB_TOKEN}@github.com/Ugagguturu/Jenkins-scratch.git
+                            git push origin ${tagName}
                         """
                     }
                 }
