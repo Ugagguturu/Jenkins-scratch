@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'example-creds-id', url: 'https://github.com/Ugagguturu/Jenkins-scratch.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_pat', url: 'https://github.com/Ugagguturu/Jenkins-scratch.git']])
             }
         }
 
